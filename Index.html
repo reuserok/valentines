@@ -1,0 +1,1104 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- ✅ MOBILE SUPPORT -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For you Pookie</title>
+
+  <!-- Cutest font -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #e4d6d8, #e4d6d8);
+      font-family: 'Dancing Script', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: #E6A2AC;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: smoothReveal 1.5s ease-out forwards;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0px;
+    }
+
+    @keyframes smoothReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gif-overlay { 
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      width: 100%;
+      max-width: 600px;
+      pointer-events: none;
+    }
+
+    .usagi-img {
+      width: 120px;
+      opacity: 0.7;
+      pointer-events: none;
+      margin-right: -30px;
+    }
+
+    .button-wrapper {
+      position: absolute;
+      top: calc(50% + 120px);
+      z-index: 1;
+    }
+
+    .valentine-box {
+      display: flex;
+      gap: 40px;
+    }
+
+    .valentine-btn {
+      background: transparent;
+      border: 2px solid #E6A2AC;
+      color: #E6A2AC;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      padding: 10px 25px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .valentine-btn:hover {
+      background: #E6A2AC;
+      color: white;
+    }
+
+    .bouquet {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bouquet img {
+      width: 170px;
+      opacity: 0.95;
+      animation: bouquetSway 3.2s ease-in-out infinite;
+      transform-origin: center;
+      display: block;
+    }
+
+    @keyframes bouquetSway {
+      0%   { transform: translateX(-12px) rotate(-5deg); }
+      50%  { transform: translateX(12px) rotate(5deg); }
+      100% { transform: translateX(-12px) rotate(-5deg); }
+    }
+
+    .bouquet.tl { transform: translate(-50%, -50%) translate(-280px, -250px) rotate(-25deg); }
+    .bouquet.tr { transform: translate(-50%, -50%) translate(280px, -250px) scaleX(-1) rotate(-25deg); }
+    .bouquet.bl { transform: translate(-50%, -50%) translate(-280px, 250px) scaleY(-1) rotate(-25deg); }
+    .bouquet.br { transform: translate(-50%, -50%) translate(280px, 250px) scaleX(-1) scaleY(-1) rotate(-25deg); }
+
+    .flower-frame {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flower-frame img {
+      width: 420px;
+      opacity: 0.9;
+      display: block;
+      animation: frameBreathe 2.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes frameBreathe {
+      0%   { transform: scale(1) rotate(-0.6deg); }
+      50%  { transform: scale(1.02) rotate(0.6deg); }
+      100% { transform: scale(1) rotate(-0.6deg); }
+    }
+
+    .frame-top { transform: translate(-50%, -50%) translate(0px, -260px); }
+    .frame-bottom { transform: translate(-50%, -50%) translate(0px, 260px) scaleY(-1); }
+    .frame-left { transform: translate(-50%, -50%) translate(-360px, 0px) rotate(90deg); }
+    .frame-right { transform: translate(-50%, -50%) translate(360px, 0px) rotate(-90deg); }
+
+    .fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+
+    .hate-img {
+      position: fixed;
+      width: 170px;
+      opacity: 0;
+      transform: translateY(6px) scale(0.98);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.15));
+    }
+
+    .hate-img.show { opacity: 1; transform: translateY(0px) scale(1); }
+
+    .qm {
+      position: fixed;
+      font-family: 'Dancing Script', cursive;
+      font-size: 34px;
+      color: #E6A2AC;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+      text-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    .qm.show {
+      opacity: 1;
+      transform: scale(1);
+      animation: qmWiggle 0.7s ease-in-out infinite;
+    }
+
+    @keyframes qmWiggle {
+      0% { transform: translateY(0) rotate(-6deg) scale(1); }
+      50% { transform: translateY(-4px) rotate(6deg) scale(1.02); }
+      100% { transform: translateY(0) rotate(-6deg) scale(1); }
+    }
+
+    .trash {
+      position: fixed;
+      width: 150px;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+
+    .trash.show { opacity: 1; transform: scale(1); }
+
+    .cursor {
+      position: fixed;
+      width: 38px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 10000;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.20));
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 10px rgba(255,255,255,0.9);
+      pointer-events: none;
+      z-index: 10001;
+      opacity: 0;
+      animation: sparklePop 0.85s ease-out forwards;
+    }
+
+    @keyframes sparklePop {
+      0% { opacity: 0; transform: translate(0,0) scale(0.6); }
+      15% { opacity: 1; transform: translate(0,0) scale(1.1); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
+    }
+
+    .fade-out { animation: fadeOut 0.9s ease forwards; }
+    @keyframes fadeOut { to { opacity: 0; transform: scale(0.96); } }
+
+    /* ===== MUSIC WIDGET ===== */
+
+    .music-widget {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(230,162,172,0.35);
+      box-shadow:
+        0 10px 18px rgba(0,0,0,0.08),
+        0 0 16px rgba(230,162,172,0.35),
+        0 0 28px rgba(230,162,172,0.22);
+      color: #E6A2AC;
+      user-select: none;
+      pointer-events: auto;
+    }
+
+    .music-gif {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      border-radius: 10px;
+      opacity: 0.95;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.10));
+    }
+
+    .music-track {
+      font-size: 16px;
+      white-space: nowrap;
+      opacity: 0.95;
+      transform: translateY(1px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-controls { display: flex; gap: 8px; }
+
+    .music-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      border: 1px solid rgba(230,162,172,0.55);
+      background: transparent;
+      color: #E6A2AC;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      transition: all 0.25s ease;
+    }
+
+    .music-btn:hover { background: rgba(230,162,172,0.22); }
+
+    .eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      width: 22px;
+      height: 16px;
+      opacity: 0.9;
+    }
+
+    .eq span {
+      width: 4px;
+      height: 6px;
+      border-radius: 999px;
+      background: #E6A2AC;
+      transform-origin: bottom;
+      opacity: 0.65;
+    }
+
+    .eq.playing span {
+      animation: eqBounce 0.9s ease-in-out infinite;
+      opacity: 1;
+    }
+
+    .eq.playing span:nth-child(1) { animation-delay: 0s; }
+    .eq.playing span:nth-child(2) { animation-delay: 0.12s; }
+    .eq.playing span:nth-child(3) { animation-delay: 0.24s; }
+
+    @keyframes eqBounce {
+      0%   { height: 5px; }
+      20%  { height: 14px; }
+      50%  { height: 7px; }
+      80%  { height: 16px; }
+      100% { height: 5px; }
+    }
+
+    /* ===== YES TRANSITION + PAGE ===== */
+
+    .yes-curtain {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35), rgba(230,162,172,0.25), rgba(228,214,216,0.95));
+      opacity: 0;
+      transform: scale(1.02);
+      filter: blur(10px);
+      transition: opacity 0.65s ease, transform 0.65s ease, filter 0.65s ease;
+      z-index: 10000;
+      pointer-events: none;
+    }
+
+    .yes-curtain.show {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px);
+    }
+
+    .yes-page {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .yes-page.show { opacity: 1; transform: translateY(0px) scale(1); }
+
+    .yes-decor {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.95;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.10));
+    }
+
+    .yes-firework { width: 420px; max-width: 45vw; opacity: 0.85; }
+    .yes-fireworks { width: 360px; max-width: 40vw; opacity: 0.8; }
+    .yes-starpink { width: 520px; max-width: 60vw; opacity: 0.55; }
+    .yes-coolheart { width: 120px; opacity: 0.95; }
+
+    .yes-center {
+      position: relative;
+      pointer-events: auto;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 22px 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(230,162,172,0.28);
+      box-shadow:
+        0 18px 30px rgba(0,0,0,0.10),
+        0 0 22px rgba(230,162,172,0.20);
+      max-width: min(560px, 84vw);
+      text-align: center;
+      color: #E6A2AC;
+    }
+
+    .yes-cute {
+      width: 240px;
+      max-width: 55vw;
+      height: auto;
+      margin-top: 2px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.10));
+    }
+
+    .yes-letter-title { font-size: 2.0rem; line-height: 1; margin: 0; padding: 0; }
+    .yes-letter { font-size: 1.25rem; line-height: 1.35; margin: 0; padding: 0 6px; opacity: 0.95; }
+    .yes-sign { font-size: 1.2rem; opacity: 0.95; margin-top: 4px; }
+
+    @keyframes floaty {
+      0% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.01); }
+      100% { transform: translateY(0px) scale(1); }
+    }
+
+    .floaty { animation: floaty 3.5s ease-in-out infinite; }
+
+    /* ✅ ROSEE RIGHT BESIDE "I love youuuuu" */
+    .rosee-inline{
+      width: 34px;
+      height: 34px;
+      vertical-align: middle;
+      margin-left: 8px;
+      transform: translateY(-1px);
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.10));
+      opacity: 0.95;
+    }
+
+    /* ✅ HEART NEXT TO "YAYYYY" */
+    .yay-heart{
+      width: 38px;
+      height: 38px;
+      vertical-align: middle;
+      margin-left: 10px;
+      transform: translateY(-2px);
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
+      opacity: 0.95;
+    }
+
+    /* ===== BACK BUTTON (ONLY SHOWS ON YES PAGE) ===== */
+    .back-btn{
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 10003;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid rgba(230,162,172,0.45);
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      color: #E6A2AC;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08), 0 0 18px rgba(230,162,172,0.22);
+      opacity: 0;
+      transform: translateY(-6px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .back-btn.show{
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+      pointer-events: auto;
+    }
+
+    /* ===== RESET ANIMATION ===== */
+    .reset-curtain{
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.55), rgba(230,162,172,0.20), rgba(228,214,216,0.92));
+      transform: scale(1.02);
+      filter: blur(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+    }
+    .reset-curtain.show{
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px);
+    }
+
+    /* ===== ✅ MOBILE FRIENDLY ===== */
+    @media (max-width: 600px) {
+      body { padding: 14px; }
+
+      h1 {
+        font-size: 1.25rem;
+        text-align: center;
+        padding: 0 10px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .usagi-img { width: 90px; margin-right: 0; }
+
+      .gif-overlay {
+        max-width: 92vw;
+        width: 92vw;
+        opacity: 0.85;
+      }
+
+      .button-wrapper {
+        top: calc(50% + 150px);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .valentine-box { gap: 16px; }
+
+      .valentine-btn {
+        font-size: 1.15rem;
+        padding: 10px 18px;
+        border-radius: 16px;
+      }
+
+      .bouquet img { width: 120px; }
+
+      .bouquet.tl { transform: translate(-50%, -50%) translate(-135px, -210px) rotate(-22deg); }
+      .bouquet.tr { transform: translate(-50%, -50%) translate(135px, -210px) scaleX(-1) rotate(-22deg); }
+      .bouquet.bl { transform: translate(-50%, -50%) translate(-135px, 210px) scaleY(-1) rotate(-22deg); }
+      .bouquet.br { transform: translate(-50%, -50%) translate(135px, 210px) scaleX(-1) scaleY(-1) rotate(-22deg); }
+
+      .flower-frame img { width: 320px; opacity: 0.85; }
+      .frame-top    { transform: translate(-50%, -50%) translate(0px, -205px); }
+      .frame-bottom { transform: translate(-50%, -50%) translate(0px, 205px) scaleY(-1); }
+      .frame-left   { transform: translate(-50%, -50%) translate(-255px, 0px) rotate(90deg); }
+      .frame-right  { transform: translate(-50%, -50%) translate(255px, 0px) rotate(-90deg); }
+
+      .music-widget {
+        bottom: 16px;
+        width: min(92vw, 420px);
+        justify-content: space-between;
+      }
+
+      .music-track { font-size: 14px; }
+
+      .music-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 14px;
+      }
+
+      .yes-center {
+        max-width: 92vw;
+        padding: 18px 16px 14px;
+        border-radius: 20px;
+      }
+
+      .yes-letter-title { font-size: 1.7rem; }
+      .yes-letter { font-size: 1.1rem; }
+
+      .yes-cute { width: 210px; max-width: 70vw; }
+
+      .yes-firework { width: 300px; max-width: 55vw; }
+      .yes-fireworks { width: 260px; max-width: 50vw; }
+      .yes-starpink { width: 420px; max-width: 85vw; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ✅ HOME CONTENT (we will restore this on back) -->
+  <img src="gif.gif" alt="flowers" class="gif-overlay" id="homeGif">
+
+  <div class="bouquet tl"><img src="pink-tulips-2.png" alt=""></div>
+  <div class="bouquet tr"><img src="pink-tulips-2.png" alt=""></div>
+  <div class="bouquet bl"><img src="pink-tulips-2.png" alt=""></div>
+  <div class="bouquet br"><img src="pink-tulips-2.png" alt=""></div>
+
+  <div class="flower-frame frame-top"><img src="flowers-2.png"></div>
+  <div class="flower-frame frame-bottom"><img src="flowers-2.png"></div>
+  <div class="flower-frame frame-left"><img src="flowers-2.png"></div>
+  <div class="flower-frame frame-right"><img src="flowers-2.png"></div>
+
+  <h1 id="homeTitle">
+    <img src="usagi.png" alt="usagi" class="usagi-img">
+    Will you be my Valentine, pookie? 💖
+  </h1>
+
+  <div class="button-wrapper" id="homeButtons">
+    <div class="valentine-box">
+      <button class="valentine-btn">Yes</button>
+      <button class="valentine-btn">No</button>
+    </div>
+  </div>
+
+  <!-- ✅ MUSIC stays always -->
+  <audio id="bgMusic1" src="music.mp3" loop></audio>
+  <audio id="bgMusic2" src="music-2.mp3" loop></audio>
+  <audio id="bgMusic3" src="music-3.mp3" loop></audio>
+  <audio id="bgMusic4" src="music-4.mp3" loop></audio>
+
+  <div class="music-widget" id="musicWidget">
+    <img id="trackGif" class="music-gif" src="sonic.gif" alt="">
+    <div class="eq" id="eq"><span></span><span></span><span></span></div>
+
+    <div class="music-track">
+      <span id="musicLabel">Music 3</span>
+    </div>
+
+    <div class="music-controls">
+      <button class="music-btn" id="musicPrev" title="Previous">⟲</button>
+      <button class="music-btn" id="musicPlay" title="Play / Pause">▶</button>
+      <button class="music-btn" id="musicNext" title="Next">⟳</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll('.valentine-btn');
+      const noBtn = buttons[1];
+      const yesBtn = buttons[0];
+
+      // ✅ cache ALL home elements so we can restore them on Back
+      const homeEls = Array.from(document.body.children).filter(el => {
+        const id = el.id || '';
+        return id !== 'musicWidget' && id !== 'bgMusic1' && id !== 'bgMusic2' && id !== 'bgMusic3' && id !== 'bgMusic4';
+      });
+
+      const music1 = document.getElementById('bgMusic1');
+      const music2 = document.getElementById('bgMusic2');
+      const music3 = document.getElementById('bgMusic3');
+      const music4 = document.getElementById('bgMusic4');
+
+      const musicWidget = document.getElementById('musicWidget');
+      const musicLabel = document.getElementById('musicLabel');
+      const musicPrev = document.getElementById('musicPrev');
+      const musicPlay = document.getElementById('musicPlay');
+      const musicNext = document.getElementById('musicNext');
+      const eq = document.getElementById('eq');
+      const trackGifEl = document.getElementById('trackGif');
+
+      const tracks = [music1, music2, music3, music4];
+      const trackGifs = ['kirby.gif', 'caty.gif', 'sonic.gif', 'lol.gif'];
+
+      let currentTrack = 2;
+      let isPlaying = false;
+      let soundUnlocked = false;
+
+      function safePauseAll() { tracks.forEach(a => { try { a.pause(); } catch (e) {} }); }
+      function setVolumes() { tracks.forEach(a => { if (a) a.volume = 0.35; }); }
+      function setMutedAll(m) { tracks.forEach(a => { if (a) a.muted = m; }); }
+
+      function updateMusicUI() {
+        if (musicLabel) musicLabel.textContent = 'Music ' + (currentTrack + 1);
+        if (musicPlay) musicPlay.textContent = isPlaying ? '❚❚' : '▶';
+        if (trackGifEl) trackGifEl.src = trackGifs[currentTrack];
+        if (eq) isPlaying ? eq.classList.add('playing') : eq.classList.remove('playing');
+      }
+
+      function playCurrent() {
+        setVolumes();
+        const a = tracks[currentTrack];
+        if (!a) return;
+        safePauseAll();
+        try { const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch(e){}
+        isPlaying = true;
+        updateMusicUI();
+      }
+
+      function pauseCurrent() {
+        const a = tracks[currentTrack];
+        if (!a) return;
+        try { a.pause(); } catch(e){}
+        isPlaying = false;
+        updateMusicUI();
+      }
+
+      function togglePlay() { isPlaying ? pauseCurrent() : playCurrent(); }
+      function switchTrack(dir) {
+        currentTrack = (currentTrack + dir + tracks.length) % tracks.length;
+        if (isPlaying) playCurrent();
+        else updateMusicUI();
+      }
+
+      function tryAutoplayMuted() {
+        setVolumes();
+        setMutedAll(true);
+        isPlaying = true;
+        updateMusicUI();
+        const a = tracks[currentTrack];
+        if (!a) return;
+        try {
+          const p = a.play();
+          if (p && p.catch) p.catch(() => { isPlaying = false; updateMusicUI(); });
+        } catch(e) { isPlaying = false; updateMusicUI(); }
+      }
+
+      function unlockSound() {
+        if (soundUnlocked) return;
+        soundUnlocked = true;
+        setMutedAll(false);
+        if (!isPlaying) playCurrent();
+        else { setVolumes(); updateMusicUI(); }
+      }
+
+      tryAutoplayMuted();
+      document.addEventListener('click', unlockSound, { once: true });
+      document.addEventListener('touchstart', unlockSound, { once: true });
+
+      if (musicWidget) musicWidget.addEventListener('click', (e) => { e.stopPropagation(); unlockSound(); });
+      if (musicPlay) musicPlay.addEventListener('click', (e) => { e.preventDefault(); togglePlay(); });
+      if (musicPrev) musicPrev.addEventListener('click', (e) => { e.preventDefault(); switchTrack(-1); });
+      if (musicNext) musicNext.addEventListener('click', (e) => { e.preventDefault(); switchTrack(1); });
+      updateMusicUI();
+
+      // ===== YES PAGE BUILD =====
+      function buildYesPage() {
+        const page = document.createElement('div');
+        page.className = 'yes-page';
+        page.id = 'yesPage';
+
+        const firework = document.createElement('img');
+        firework.className = 'yes-decor yes-firework floaty';
+        firework.src = 'firework.gif';
+        firework.style.left = '6%';
+        firework.style.top = '6%';
+
+        const fireworks = document.createElement('img');
+        fireworks.className = 'yes-decor yes-fireworks floaty';
+        fireworks.src = 'fireworks.gif';
+        fireworks.style.right = '6%';
+        fireworks.style.top = '10%';
+        fireworks.style.animationDelay = '0.6s';
+
+        const starpink = document.createElement('img');
+        starpink.className = 'yes-decor yes-starpink';
+        starpink.src = 'starpink.gif';
+        starpink.style.left = '50%';
+        starpink.style.top = '46%';
+        starpink.style.transform = 'translate(-50%, -50%)';
+
+        const coolheart = document.createElement('img');
+        coolheart.className = 'yes-decor yes-coolheart floaty';
+        coolheart.src = 'coolheart.gif';
+        coolheart.style.right = '12%';
+        coolheart.style.bottom = '14%';
+        coolheart.style.animationDelay = '0.2s';
+
+        const coolheart2 = document.createElement('img');
+        coolheart2.className = 'yes-decor yes-coolheart floaty';
+        coolheart2.src = 'coolheart.gif';
+        coolheart2.style.left = '12%';
+        coolheart2.style.bottom = '16%';
+        coolheart2.style.animationDelay = '0.9s';
+
+        const center = document.createElement('div');
+        center.className = 'yes-center';
+
+        const cute = document.createElement('img');
+        cute.className = 'yes-cute';
+        cute.src = 'cute.gif';
+
+        let cuteLoop = null;
+        function restartCute() { cute.src = 'cute.gif?loop=' + Date.now(); }
+        cute.addEventListener('load', () => { clearTimeout(cuteLoop); cuteLoop = setTimeout(restartCute, 2600); });
+
+        const title = document.createElement('h2');
+        title.className = 'yes-letter-title';
+        title.innerHTML = 'YAYYYY <img src="rose.gif" class="yay-heart" alt="">';
+
+        const letter = document.createElement('p');
+        letter.className = 'yes-letter';
+        letter.innerHTML =
+          `Thank you for being my Valentine pooks.<br>
+           I’m really lucky to have you.<br>
+           I love youuuuu <img src="rosee.gif" class="rosee-inline" alt="">`;
+
+        const sign = document.createElement('div');
+        sign.className = 'yes-sign';
+        sign.textContent = 'UR GOAT AND URS ONLY ELKINNNNNNN';
+
+        center.appendChild(cute);
+        center.appendChild(title);
+        center.appendChild(letter);
+        center.appendChild(sign);
+
+        page.appendChild(starpink);
+        page.appendChild(firework);
+        page.appendChild(fireworks);
+        page.appendChild(coolheart);
+        page.appendChild(coolheart2);
+        page.appendChild(center);
+
+        document.body.appendChild(page);
+        requestAnimationFrame(() => page.classList.add('show'));
+        return page;
+      }
+
+      function createBackButton() {
+        const b = document.createElement('button');
+        b.className = 'back-btn';
+        b.id = 'backBtn';
+        b.textContent = '←';
+        document.body.appendChild(b);
+        requestAnimationFrame(() => b.classList.add('show'));
+        return b;
+      }
+
+      function ensureResetCurtain() {
+        let rc = document.getElementById('resetCurtain');
+        if (rc) return rc;
+        rc = document.createElement('div');
+        rc.className = 'reset-curtain';
+        rc.id = 'resetCurtain';
+        document.body.appendChild(rc);
+        return rc;
+      }
+
+      function softResetToHome(yesPage, backBtn) {
+        const rc = ensureResetCurtain();
+        requestAnimationFrame(() => rc.classList.add('show'));
+
+        if (yesPage && yesPage.parentNode) yesPage.parentNode.removeChild(yesPage);
+        if (backBtn && backBtn.parentNode) backBtn.parentNode.removeChild(backBtn);
+
+        const fxLayer = document.querySelector('.fx-layer');
+        if (fxLayer) fxLayer.innerHTML = '';
+
+        homeEls.forEach(el => {
+          if (!document.body.contains(el)) {
+            document.body.insertBefore(el, music1);
+          }
+        });
+
+        setTimeout(() => {
+          rc.classList.remove('show');
+          setTimeout(() => { if (rc.parentNode) rc.parentNode.removeChild(rc); }, 650);
+        }, 650);
+      }
+
+      yesBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        unlockSound();
+
+        const curtain = document.createElement('div');
+        curtain.className = 'yes-curtain';
+        curtain.id = 'yesCurtain';
+        document.body.appendChild(curtain);
+
+        requestAnimationFrame(() => curtain.classList.add('show'));
+
+        setTimeout(() => {
+          const keepAudios = [music1, music2, music3, music4];
+          const keepWidget = musicWidget;
+          const keepCurtain = curtain;
+
+          const toRemove = Array.from(document.body.children).filter(el => {
+            return el !== keepWidget && el !== keepCurtain && !keepAudios.includes(el);
+          });
+          toRemove.forEach(el => el.remove());
+
+          const yesPage = buildYesPage();
+          const backBtn = createBackButton();
+
+          backBtn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            softResetToHome(yesPage, backBtn);
+          });
+
+          setTimeout(() => {
+            if (keepCurtain) keepCurtain.classList.remove('show');
+            setTimeout(() => {
+              if (keepCurtain && keepCurtain.parentNode) keepCurtain.parentNode.removeChild(keepCurtain);
+            }, 650);
+          }, 350);
+        }, 650);
+      });
+
+      const fx = document.createElement('div');
+      fx.className = 'fx-layer';
+      document.body.appendChild(fx);
+
+      let noClicks = 0;
+      let hateImgEl = null;
+      let qmEls = [];
+      let trashEl = null;
+      let cursorEl = null;
+      let yesHintTop = null;
+
+      function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+      function placeNoButtonRandom() {
+        const r = noBtn.getBoundingClientRect();
+        const pad = 16;
+        const maxX = window.innerWidth - r.width - pad;
+        const maxY = window.innerHeight - r.height - pad;
+        const x = Math.floor(Math.random() * (maxX - pad + 1)) + pad;
+        const y = Math.floor(Math.random() * (maxY - pad + 1)) + pad;
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+        noBtn.style.zIndex = '9998';
+      }
+
+      function getNoBtnRect() { return noBtn.getBoundingClientRect(); }
+
+      function ensureHateImg() {
+        if (hateImgEl) return;
+        hateImgEl = document.createElement('img');
+        hateImgEl.className = 'hate-img';
+        hateImgEl.src = 'do-u-hate-me.png';
+        hateImgEl.alt = '';
+        fx.appendChild(hateImgEl);
+
+        const makeQM = () => {
+          const s = document.createElement('div');
+          s.className = 'qm';
+          s.textContent = '???';
+          fx.appendChild(s);
+          return s;
+        };
+        qmEls = [makeQM(), makeQM(), makeQM(), makeQM()];
+      }
+
+      function showHateAndQuestions() {
+        ensureHateImg();
+        const rect = getNoBtnRect();
+        let imgX = rect.right + 12;
+        let imgY = rect.top - 40;
+        imgX = clamp(imgX, 8, window.innerWidth - 190);
+        imgY = clamp(imgY, 8, window.innerHeight - 190);
+        hateImgEl.style.left = imgX + 'px';
+        hateImgEl.style.top = imgY + 'px';
+        requestAnimationFrame(() => hateImgEl.classList.add('show'));
+
+        const positions = [
+          { x: rect.left - 36, y: rect.top - 28 },
+          { x: rect.right + 10, y: rect.top - 28 },
+          { x: rect.left - 36, y: rect.bottom - 6 },
+          { x: rect.right + 10, y: rect.bottom - 6 }
+        ];
+        qmEls.forEach((el, i) => {
+          el.style.left = positions[i].x + 'px';
+          el.style.top = positions[i].y + 'px';
+          requestAnimationFrame(() => el.classList.add('show'));
+        });
+      }
+
+      function hideHateAndQuestions() {
+        if (hateImgEl) { hateImgEl.classList.remove('show'); hateImgEl.classList.add('fade-out'); }
+        qmEls.forEach(el => { el.classList.remove('show'); el.classList.add('fade-out'); });
+      }
+
+      function ensureTrash() {
+        if (trashEl) return;
+        trashEl = document.createElement('img');
+        trashEl.className = 'trash';
+        trashEl.src = 'rubbish.png';
+        trashEl.alt = '';
+        fx.appendChild(trashEl);
+      }
+
+      function ensureCursor() {
+        if (cursorEl) return;
+        cursorEl = document.createElement('img');
+        cursorEl.className = 'cursor';
+        cursorEl.src = 'mouse-cursor.png';
+        cursorEl.alt = '';
+        fx.appendChild(cursorEl);
+      }
+
+      function animateMove(from, to, duration, onUpdate, onDone) {
+        const start = performance.now();
+        function tick(now) {
+          const t = (now - start) / duration;
+          const p = t >= 1 ? 1 : t;
+          const eased = p * p * (3 - 2 * p);
+          const x = from.x + (to.x - from.x) * eased;
+          const y = from.y + (to.y - from.y) * eased;
+          onUpdate({ x, y, p: eased });
+          if (p < 1) requestAnimationFrame(tick);
+          else if (onDone) onDone();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function spawnSparkles(x, y) {
+        const count = 18;
+        for (let i = 0; i < count; i++) {
+          const s = document.createElement('div');
+          s.className = 'sparkle';
+          const ang = Math.random() * Math.PI * 2;
+          const dist = 50 + Math.random() * 65;
+          const dx = Math.cos(ang) * dist;
+          const dy = Math.sin(ang) * dist;
+          s.style.left = (x + (Math.random() * 12 - 6)) + 'px';
+          s.style.top = (y + (Math.random() * 12 - 6)) + 'px';
+          s.style.setProperty('--dx', dx + 'px');
+          s.style.setProperty('--dy', dy + 'px');
+          fx.appendChild(s);
+          setTimeout(() => { if (s && s.parentNode) s.parentNode.removeChild(s); }, 900);
+        }
+      }
+
+      function thirdClickSequence() {
+        hideHateAndQuestions();
+        ensureTrash();
+        ensureCursor();
+
+        const pad = 20, tw = 150, th = 150;
+        const trashX = Math.floor(Math.random() * (window.innerWidth - tw - pad * 2)) + pad;
+        const trashY = Math.floor(Math.random() * (window.innerHeight - th - pad * 2)) + pad;
+
+        trashEl.style.left = trashX + 'px';
+        trashEl.style.top = trashY + 'px';
+        requestAnimationFrame(() => trashEl.classList.add('show'));
+
+        cursorEl.style.left = '40px';
+        cursorEl.style.top = '40px';
+        cursorEl.style.opacity = '1';
+
+        const startCursor = { x: 40, y: 40 };
+        const btnRect = getNoBtnRect();
+        const btnTarget = { x: btnRect.left + btnRect.width / 2 - 10, y: btnRect.top + btnRect.height / 2 - 10 };
+
+        animateMove(startCursor, btnTarget, 1300, ({ x, y }) => {
+          cursorEl.style.left = x + 'px';
+          cursorEl.style.top = y + 'px';
+        }, () => {
+          const trashRect = trashEl.getBoundingClientRect();
+          const trashCenter = { x: trashRect.left + trashRect.width / 2, y: trashRect.top + trashRect.height / 2 };
+
+          const bRect = getNoBtnRect();
+          const btnFrom = { x: bRect.left, y: bRect.top };
+          const btnTo = { x: trashCenter.x - bRect.width / 2, y: trashCenter.y - bRect.height / 2 };
+
+          const cursorFrom = { x: parseFloat(cursorEl.style.left), y: parseFloat(cursorEl.style.top) };
+          const cursorTo = { x: trashCenter.x - 12, y: trashCenter.y - 12 };
+
+          animateMove({ x: 0, y: 0 }, { x: 1, y: 1 }, 2200, ({ p }) => {
+            const bx = btnFrom.x + (btnTo.x - btnFrom.x) * p;
+            const by = btnFrom.y + (btnTo.y - btnFrom.y) * p;
+
+            const cx = cursorFrom.x + (cursorTo.x - cursorFrom.x) * p;
+            const cy = cursorFrom.y + (cursorTo.y - cursorFrom.y) * p;
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = bx + 'px';
+            noBtn.style.top = by + 'px';
+
+            cursorEl.style.left = cx + 'px';
+            cursorEl.style.top = cy + 'px';
+          }, () => {
+            const finalBtn = getNoBtnRect();
+            spawnSparkles(finalBtn.left + finalBtn.width / 2, finalBtn.top + finalBtn.height / 2);
+
+            noBtn.style.opacity = '0';
+            noBtn.style.pointerEvents = 'none';
+
+            trashEl.src = 'filled-rubbish.png';
+
+            setTimeout(() => { trashEl.classList.add('fade-out'); cursorEl.classList.add('fade-out'); }, 520);
+            setTimeout(() => {
+              if (trashEl && trashEl.parentNode) trashEl.parentNode.removeChild(trashEl);
+              if (cursorEl && cursorEl.parentNode) cursorEl.parentNode.removeChild(cursorEl);
+            }, 1550);
+          });
+        });
+      }
+
+      noBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        noClicks += 1;
+
+        if (noClicks === 1) {
+          placeNoButtonRandom();
+        } else if (noClicks === 2) {
+          showHateAndQuestions();
+
+          if (!yesHintTop) {
+            yesHintTop = document.createElement('div');
+            yesHintTop.className = 'qm';
+            yesHintTop.textContent = '⬇';
+            fx.appendChild(yesHintTop);
+          }
+
+          const yesRect = yesBtn.getBoundingClientRect();
+          yesHintTop.style.left = (yesRect.left + yesRect.width / 2 - 10) + 'px';
+          yesHintTop.style.top = (yesRect.top - 55) + 'px';
+          requestAnimationFrame(() => yesHintTop.classList.add('show'));
+        } else if (noClicks === 3) {
+          thirdClickSequence();
+        } else {
+          placeNoButtonRandom();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (noClicks >= 2) {
+          try { showHateAndQuestions(); } catch (e) {}
+          const yesRect = yesBtn.getBoundingClientRect();
+          if (yesHintTop) {
+            yesHintTop.style.left = (yesRect.left + yesRect.width / 2 - 10) + 'px';
+            yesHintTop.style.top = (yesRect.top - 55) + 'px';
+          }
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
