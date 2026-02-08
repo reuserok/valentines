@@ -480,87 +480,59 @@
 
     /* ===== ✅ MOBILE FRIENDLY ===== */
     @media (max-width: 600px) {
+      body { padding: 14px; }
 
-      /* iOS Safari fix for 100vh + safe areas */
-      body {
-        padding: 0;
-        min-height: 100svh;
-        height: 100svh;
-        overflow: hidden;
-      }
-
-      /* Keep everything centered tighter on mobile */
       h1 {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
         text-align: center;
-        padding: 0 16px;
+        padding: 0 10px;
         flex-direction: column;
-        gap: 10px;
-        line-height: 1.2;
+        gap: 8px;
       }
 
-      .usagi-img {
-        width: 86px;
-        margin-right: 0;
-        opacity: 0.75;
-      }
+      .usagi-img { width: 90px; margin-right: 0; }
 
-      /* Main background gif fits phone better */
       .gif-overlay {
-        width: 92vw;
         max-width: 92vw;
-        opacity: 0.82;
-        transform: translate(-50%, -50%) scale(0.98);
+        width: 92vw;
+        opacity: 0.85;
       }
 
-      /* Move buttons up + make them more tappable */
       .button-wrapper {
-        top: calc(50% + 105px);
+        top: calc(50% + 150px);
         width: 100%;
         display: flex;
         justify-content: center;
       }
 
-      .valentine-box { gap: 14px; }
+      .valentine-box { gap: 16px; }
 
       .valentine-btn {
         font-size: 1.15rem;
-        padding: 12px 20px;
-        border-radius: 18px;
-        min-width: 110px;
+        padding: 10px 18px;
+        border-radius: 16px;
       }
 
-      /* Bouquets smaller + positioned nicer for narrow screens */
-      .bouquet img { width: 108px; }
+      .bouquet img { width: 120px; }
 
-      .bouquet.tl { transform: translate(-50%, -50%) translate(-120px, -215px) rotate(-22deg); }
-      .bouquet.tr { transform: translate(-50%, -50%) translate(120px, -215px) scaleX(-1) rotate(-22deg); }
-      .bouquet.bl { transform: translate(-50%, -50%) translate(-120px, 215px) scaleY(-1) rotate(-22deg); }
-      .bouquet.br { transform: translate(-50%, -50%) translate(120px, 215px) scaleX(-1) scaleY(-1) rotate(-22deg); }
+      .bouquet.tl { transform: translate(-50%, -50%) translate(-135px, -210px) rotate(-22deg); }
+      .bouquet.tr { transform: translate(-50%, -50%) translate(135px, -210px) scaleX(-1) rotate(-22deg); }
+      .bouquet.bl { transform: translate(-50%, -50%) translate(-135px, 210px) scaleY(-1) rotate(-22deg); }
+      .bouquet.br { transform: translate(-50%, -50%) translate(135px, 210px) scaleX(-1) scaleY(-1) rotate(-22deg); }
 
-      /* Flower frame tighter so it doesn’t look “too wide” on mobile */
-      .flower-frame img {
-        width: 300px;
-        opacity: 0.82;
-      }
+      .flower-frame img { width: 320px; opacity: 0.85; }
+      .frame-top    { transform: translate(-50%, -50%) translate(0px, -205px); }
+      .frame-bottom { transform: translate(-50%, -50%) translate(0px, 205px) scaleY(-1); }
+      .frame-left   { transform: translate(-50%, -50%) translate(-255px, 0px) rotate(90deg); }
+      .frame-right  { transform: translate(-50%, -50%) translate(255px, 0px) rotate(-90deg); }
 
-      .frame-top    { transform: translate(-50%, -50%) translate(0px, -200px); }
-      .frame-bottom { transform: translate(-50%, -50%) translate(0px, 200px) scaleY(-1); }
-      .frame-left   { transform: translate(-50%, -50%) translate(-235px, 0px) rotate(90deg); }
-      .frame-right  { transform: translate(-50%, -50%) translate(235px, 0px) rotate(-90deg); }
-
-      /* Music widget: sit above phone bottom bar (safe area) */
       .music-widget {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(env(safe-area-inset-bottom) + 12px);
-        width: min(94vw, 420px);
+        bottom: 16px;
+        width: min(92vw, 420px);
         justify-content: space-between;
-        padding: 10px 10px;
-        border-radius: 18px;
       }
 
-      .music-track { font-size: 13px; }
+      .music-track { font-size: 14px; }
 
       .music-btn {
         width: 34px;
@@ -574,14 +546,14 @@
         border-radius: 20px;
       }
 
-      .yes-letter-title { font-size: 1.65rem; }
-      .yes-letter { font-size: 1.05rem; }
+      .yes-letter-title { font-size: 1.7rem; }
+      .yes-letter { font-size: 1.1rem; }
 
-      .yes-cute { width: 205px; max-width: 70vw; }
+      .yes-cute { width: 210px; max-width: 70vw; }
 
-      .yes-firework { width: 280px; max-width: 55vw; }
-      .yes-fireworks { width: 240px; max-width: 50vw; }
-      .yes-starpink { width: 380px; max-width: 88vw; }
+      .yes-firework { width: 300px; max-width: 55vw; }
+      .yes-fireworks { width: 260px; max-width: 50vw; }
+      .yes-starpink { width: 420px; max-width: 85vw; }
     }
   </style>
 </head>
